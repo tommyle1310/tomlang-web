@@ -18,7 +18,17 @@ const HorizontalList = ({ title }: { title: string }) => {
       >
         <CarouselContent>
           {Array.from({ length: 5 }).map((_, index) => (
-            <CarouselItem key={index} className="max-sm:basis-1/1 md:basis-1/3 lg:basis-1/4">
+            <CarouselItem key={index} className="max-sm:basis-1/1 
+    md:basis-1/3 
+    lg:basis-1/4 
+    cursor-pointer 
+    transition-transform 
+    duration-500 
+    transform 
+    hover:scale-95 
+    hover:shadow-lg
+    hover:shadow-primary-200 
+    hover:rounded-md">
               <div className="">
                 {title === 'Continue Courses' &&
                   <ContinueCourses />

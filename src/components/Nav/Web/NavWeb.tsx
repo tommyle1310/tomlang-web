@@ -1,12 +1,13 @@
 import SearchInput from "@/components/SearchInput"
 import NavItem from "./NavItem"
+import { Link } from "react-router-dom"
 
 const NavWeb = () => {
     return (
-        <div className=" max-lg:hidden text-primary-500 font-bold">
+        <div className=" max-lg:hidden mx-auto max-w-screen-lg text-primary-500 font-bold">
             <div className="p-3 jb">
                 <div className="flex items-center">
-                    <div className="bg-blue-300 w-20 h-20"></div>
+                    <Link to={'/'} className="bg-blue-300 w-20 h-20"></Link>
                     <div className="p-2">
                         <SearchInput />
                     </div>
