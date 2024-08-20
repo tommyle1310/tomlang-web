@@ -1,10 +1,8 @@
-
-
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
-import 'draft-js/dist/Draft.css'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App.tsx';
+import './index.css';
+import 'draft-js/dist/Draft.css';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -12,6 +10,7 @@ import {
 import ErrorPage from './error-page.tsx';
 import Lesson from './routes/Lesson.tsx';
 import Home from './routes/Home.tsx';
+import CreateLesson from './components/CreateLesson.tsx';
 
 const router = createBrowserRouter([
   {
@@ -20,8 +19,13 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "/lesson",
+        path: "lesson",
         element: <Lesson />,
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: "lesson/new",
+        element: <CreateLesson />,
         errorElement: <ErrorPage />,
       },
       {

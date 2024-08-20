@@ -86,6 +86,9 @@
   background: #fefefe;
 }
 
+.custom-editor .draft-btn {
+  @apply w-10 h-10 rounded-md hover:duration-300 hover:bg-slate-100 border border-slate-300 flex justify-center items-center
+}
 
 .mb-full-lap-32 {
   @apply bg-red-300 w-64 h-32 max-lg:w-full

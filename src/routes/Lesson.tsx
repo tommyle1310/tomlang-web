@@ -1,5 +1,7 @@
+import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { courses } from "@/lib/constants/courses"
+import { Link } from "react-router-dom";
 
 const getStatusClasses = (status: string) => {
     let classes = "jb p-3 border-2 ";
@@ -18,7 +20,10 @@ const getStatusClasses = (status: string) => {
 
 const Lesson = () => {
     return (
-        <div className="p-3">
+        <div className="p-3 max-w-screen-md mx-auto">
+            <Link to='/lesson/new' className="w-full flex justify-end my-4">
+                <Button className="bg-info-600 text-white" >Create a lesson</Button>
+            </Link>
 
             <Tabs defaultValue="lessons" className="max-w-screen-md mx-auto">
                 <TabsList className="mx-auto bg-danger-300 w-full">
