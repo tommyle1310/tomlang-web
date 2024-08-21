@@ -16,11 +16,10 @@ const customStyleMap: { [styleName: string]: RenderConfig } = {
     LARGE: { style: { fontSize: '24px' } },
 };
 
-
-
 const useEditor = () => {
     const [editorState, setEditorState] = useState(() => EditorState.createEmpty());
     const [fileInputKey, setFileInputKey] = useState<number>(0);
+    const [loading, setLoading] = useState<boolean>(false); // Add loading state
 
     const onBoldClick = (e: MouseEvent<HTMLSpanElement>) => {
         e.preventDefault();
@@ -32,7 +31,6 @@ const useEditor = () => {
         setEditorState(RichUtils.toggleInlineStyle(editorState, color));
     };
 
-
     const changeTextSize = (size: string) => (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         setEditorState(RichUtils.toggleInlineStyle(editorState, size));
@@ -43,12 +41,10 @@ const useEditor = () => {
         setEditorState(RichUtils.toggleBlockType(editorState, blockType));
     };
 
-
     const logPlainText = () => {
         const contentState = editorState.getCurrentContent();
         console.log(contentState.getPlainText());
     };
-
 
     const logHTML = () => {
         const contentState: ContentState = editorState.getCurrentContent();
@@ -72,7 +68,6 @@ const useEditor = () => {
         });
         console.log(html);
     };
-
 
     const addMedia = (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
@@ -105,6 +100,8 @@ const useEditor = () => {
             formData.append('file', file);
             formData.append('upload_preset', 'ml_default'); // Replace with your preset
 
+            setLoading(true); // Set loading to true before upload
+
             try {
                 const response = await axios.post<{ secure_url: string }>('https://api.cloudinary.com/v1_1/dlavqnrlx/upload', formData);
                 const mediaUrl = response.data.secure_url;
@@ -125,6 +122,8 @@ const useEditor = () => {
                 setEditorState(newEditorState);
             } catch (error) {
                 console.error('Error uploading media:', error);
+            } finally {
+                setLoading(false); // Set loading to false after upload
             }
         } else {
             console.log('No file selected');
@@ -143,7 +142,8 @@ const useEditor = () => {
         logPlainText,
         logHTML,
         addMedia,
-        handleFileChange
+        handleFileChange,
+        loading, // Return loading state
     };
 };
 

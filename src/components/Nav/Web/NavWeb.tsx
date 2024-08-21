@@ -1,6 +1,7 @@
 import SearchInput from "@/components/SearchInput"
 import NavItem from "./NavItem"
 import { Link } from "react-router-dom"
+import { AuthForm } from "@/routes/AuthForm"
 
 const NavWeb = () => {
     return (
@@ -15,7 +16,7 @@ const NavWeb = () => {
                 <div className="flex items-center">
                     <NavItem click={() => { }} icon={'.'} title="Wish list" />
                     <NavItem click={() => { }} icon={'.'} title="Cart" />
-                    <NavItem click={() => { }} icon={'.'} title="Log in/Sign up" />
+                       <AuthForm /> 
                 </div>
             </div>
         </div>

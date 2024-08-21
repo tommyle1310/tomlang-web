@@ -69,8 +69,8 @@
   }
 }
 
-.custom-editor {
-  padding: 24px 200px;
+.custom-editor-btns {
+  @apply flex flex-wrap max-w-screen-sm my-3 gap-1
 }
 
 .DraftEditor-root {
@@ -87,7 +87,7 @@
 }
 
 .custom-editor .draft-btn {
-  @apply w-10 h-10 rounded-md hover:duration-300 hover:bg-slate-100 border border-slate-300 flex justify-center items-center
+  @apply w-10 h-10 rounded-md max-w-screen-sm  hover:duration-300 hover:bg-slate-100 border border-slate-300 flex justify-center items-center
 }
 
 .mb-full-lap-32 {

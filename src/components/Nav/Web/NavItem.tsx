@@ -3,7 +3,7 @@ import React from 'react';
 interface NavItemProps {
     title: string;
     icon: React.ReactNode; // or React.ElementType if you pass a component
-    click: () => void;
+    click?: () => void;
 }
 
 const NavItem: React.FC<NavItemProps> = ({ title, icon, click }) => {
