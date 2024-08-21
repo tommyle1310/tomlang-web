@@ -14,9 +14,9 @@ const NavWeb = () => {
                     </div>
                 </div>
                 <div className="flex items-center">
-                    <NavItem click={() => { }} icon={'.'} title="Wish list" />
-                    <NavItem click={() => { }} icon={'.'} title="Cart" />
-                       <AuthForm /> 
+                    <NavItem click={() => { }} icon={<i className="fa-solid fa-heart"></i>} title="Wish list" />
+                    <NavItem click={() => { }} icon={<i className="fa-solid fa-cart-shopping"></i>} title="Cart" />
+                    <AuthForm />
                 </div>
             </div>
         </div>

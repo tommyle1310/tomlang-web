@@ -5,6 +5,7 @@ import { Input } from "../ui/input"
 import { Label } from "../ui/label"
 import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "../ui/sheet"
 import NavWeb from "./Web/NavWeb"
+import { Link } from "react-router-dom"
 
 
 const Nav = () => {
@@ -31,7 +32,7 @@ const Nav = () => {
                                     <SheetTitle className="self-center">Tommy Teo</SheetTitle>
                                 </SheetHeader>
                                 <div className="grid gap-4 py-4">
-                                    <div className="px-2 flex items-center cursor-pointer p-2 hover:bg-gray-200 rounded relative after:-bottom-3 after:absolute after:left-0 after:w-full after:h-1 after:bg-slate-100  ">hello</div>
+                                    <Link to='/' className="px-2 flex items-center cursor-pointer p-2 hover:bg-gray-200 rounded relative after:-bottom-3 after:absolute after:left-0 after:w-full after:h-1 after:bg-slate-100  ">Home</Link>
                                     <div className="px-2 flex items-center cursor-pointer p-2 hover:bg-gray-200 rounded relative after:-bottom-3 after:absolute after:left-0 after:w-full after:h-1 after:bg-slate-100  ">hello</div>
                                     <div className="px-2 flex items-center cursor-pointer p-2 hover:bg-gray-200 rounded relative after:-bottom-3 after:absolute after:left-0 after:w-full after:h-1 after:bg-slate-100  ">hello</div>
                                     <AuthForm />

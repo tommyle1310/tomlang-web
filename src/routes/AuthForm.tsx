@@ -65,7 +65,7 @@ export function AuthForm() {
                 <div className="flex items-center cursor-pointer p-2 hover:bg-gray-200 rounded">Log in / Sign up</div>
             </DrawerTrigger>
             <DrawerContent>
-                <div className="mx-auto w-full max-w-screen-sm fc gap-6 font-sans py-16">
+                <div className="mx-auto w-full max-md:max-w-screen-sm max-w-sm fc gap-6 font-sans py-16">
                     <DrawerHeader className="p-0">
                         <DrawerTitle className="text-xl font-bold">WELCOME {isLogin ? 'BACK!' : null}</DrawerTitle>
                         <DrawerDescription>{isLogin ? `Don't have an account?` : 'Already have an account?'}<Button variant={'link'} onClick={() => setIsLogin(!isLogin)} className="text-primary-500">{isLogin ? 'Sign up' : 'Log in'}</Button></DrawerDescription>

@@ -4,7 +4,7 @@ const SearchInput = () => {
         <div className="relative flex items-center">
             {/* Icon on the left */}
             <span className="absolute left-3 text-gray-500">
-                i
+                <i className="fa-solid fa-magnifying-glass"></i>
             </span>
 
             {/* Input field */}

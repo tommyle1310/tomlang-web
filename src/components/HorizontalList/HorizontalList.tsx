@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { Carousel, CarouselContent, CarouselItem } from '../ui/carousel'
 import ContinueCourses from './ContinueCourses'
 import FeaturedCourses from './FeaturedCourses'
@@ -8,7 +9,7 @@ const HorizontalList = ({ title }: { title: string }) => {
     <div className="fc gap-3 p-4 mb-6">
       <div className="jb">
         <h3 className="txt-3 font-bold">{title}</h3>
-        <p>See all</p>
+        <Link to='/' className='font-semibold text-info-500 '>See all</Link>
       </div>
       <Carousel
         opts={{

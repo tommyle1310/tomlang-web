@@ -8,9 +8,10 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import ErrorPage from './error-page.tsx';
-import Lesson from './routes/Lesson.tsx';
+import Course from './routes/Course.tsx';
 import Home from './routes/Home.tsx';
 import CreateLesson from './components/CreateLesson.tsx';
+import LessonContent from './routes/LessonContent.tsx';
 
 const router = createBrowserRouter([
   {
@@ -19,13 +20,18 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "lesson",
-        element: <Lesson />,
+        path: "course/:id",
+        element: <Course />,
         errorElement: <ErrorPage />,
       },
       {
-        path: "lesson/new",
+        path: "course/lesson/new",
         element: <CreateLesson />,
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: "course/lesson/:id",
+        element: <LessonContent />,
         errorElement: <ErrorPage />,
       },
       {
