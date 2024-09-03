@@ -46,6 +46,8 @@ const Lesson = () => {
             setAction(prev => prev === 'ADD_EXERCISE' ? 'DEFAULT_EXERCISE' : 'ADD_EXERCISE');
         }
     };
+    console.log(action);
+    
 
     return (
         <div className="p-3 max-w-screen-md mx-auto">
@@ -74,8 +76,8 @@ const Lesson = () => {
 
             <Tabs defaultValue="lessons" className="max-w-screen-md mx-auto">
                 <TabsList className="mx-auto bg-danger-300 w-full">
-                    <TabsTrigger onClick={() => setIsLesson(!isLesson)} className="w-full" value="lessons">Lessons</TabsTrigger>
-                    <TabsTrigger onClick={() => setIsLesson(!isLesson)} className="w-full" value="exercises">Exercises</TabsTrigger>
+                    <TabsTrigger onClick={() => {setIsLesson(!isLesson); setAction('DEFAULT_LESSON')}} className="w-full" value="lessons">Lessons</TabsTrigger>
+                    <TabsTrigger onClick={() =>{setIsLesson(!isLesson); setAction('DEFAULT_EXERCISE')}} className="w-full" value="exercises">Exercises</TabsTrigger>
                 </TabsList>
                 <TabsContent value="lessons" className="fc gap-3">
                 {courses.map((item, index) => (

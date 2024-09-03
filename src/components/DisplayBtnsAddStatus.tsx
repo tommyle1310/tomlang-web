@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import { LessonItem } from "@/lib/constants/courses";
 import { ExerciseItem } from '@/lib/constants/exercises';
+import { Link } from 'react-router-dom';
 
 type DataItem = LessonItem | ExerciseItem;
 
@@ -43,6 +44,9 @@ const DisplayBtnsAddStatus = <T extends DataItem>({ index, data, setData, type }
             <Button onClick={handleAddData}>
                 <i className="fa-solid text-success-500 text-2xl fa-circle-plus"></i>
             </Button>
+            <Link to={`/course/lesson/update`} className=' mr-3'> 
+                <i className="fa-solid text-white text-xs bg-info-400 w-6 h-6 rounded-full cc fa-pencil"></i>
+            </Link>
             <AlertDialog>
                 <AlertDialogTrigger>
                     <i className="fa-solid text-warning-600 text-2xl fa-circle-minus"></i>
@@ -55,8 +59,8 @@ const DisplayBtnsAddStatus = <T extends DataItem>({ index, data, setData, type }
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                        <AlertDialogAction 
-                            onClick={handleDeleteData} 
+                        <AlertDialogAction
+                            onClick={handleDeleteData}
                             className='bg-danger-500'
                         >
                             Delete

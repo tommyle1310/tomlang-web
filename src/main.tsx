@@ -10,7 +10,7 @@ import {
 import ErrorPage from './error-page.tsx';
 import Course from './routes/Course.tsx';
 import Home from './routes/Home.tsx';
-import CreateLesson from './components/CreateLesson.tsx';
+import UpdateLesson from './components/UpdateLesson.tsx';
 import LessonContent from './routes/LessonContent.tsx';
 
 const router = createBrowserRouter([
@@ -25,8 +25,8 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
       },
       {
-        path: "course/lesson/new",
-        element: <CreateLesson />,
+        path: "course/lesson/update",
+        element: <UpdateLesson />,
         errorElement: <ErrorPage />,
       },
       {
