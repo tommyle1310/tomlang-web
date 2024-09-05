@@ -1,5 +1,5 @@
 import React from 'react';
-import { Editor, EditorState, Modifier } from 'draft-js';
+import { Editor, EditorState, Modifier, AtomicBlockUtils, ContentState } from 'draft-js';
 import mediaBlockRenderer from './MediaBlockRenderer';
 import useEditor from './useEditor';
 import { customStyleMap } from '@/lib/constants/draftConstants';
@@ -20,26 +20,36 @@ const MyEditor: React.FC = () => {
 
     const handleDrop = (event: React.DragEvent) => {
         event.preventDefault();
+
         try {
             const itemData = event.dataTransfer.getData('application/json');
-            const item = JSON.parse(itemData) as { id: string }; // Adjust based on the actual data structure
+            const item = JSON.parse(itemData) as { id: string }; // Adjust based on actual data structure
             console.log('Dropped item:', item);
 
-            // Handle item retrieval from somewhere if necessary
-            // For example, fetch the item from state or other sources
-            const content = '<div>Default Content</div>'; // Replace with actual item content fetching logic
+            // Example HTML content to insert
+            const htmlContent = '<div class="bg-red-300 p-10">hello worosadnoasidn</div>';
 
-            // Insert the content into the editor
+            // Create a new ContentState with the HTML content
             const contentState = editorState.getCurrentContent();
-            const selectionState = editorState.getSelection();
-            const newContentState = Modifier.insertText(contentState, selectionState, content);
+            const contentStateWithEntity = contentState.createEntity(
+                'media',
+                'IMMUTABLE',
+                { src: htmlContent, type: 'html' }
+            );
+            const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
+            const newEditorState = AtomicBlockUtils.insertAtomicBlock(
+                EditorState.set(editorState, { currentContent: contentStateWithEntity }),
+                entityKey,
+                ' '
+            );
 
-            const newEditorState = EditorState.push(editorState, newContentState, 'insert-characters');
+            // Update the editor state with the new content
             setEditorState(newEditorState);
         } catch (error) {
             console.error('Error parsing dropped data:', error);
         }
     };
+
 
     return (
         <div

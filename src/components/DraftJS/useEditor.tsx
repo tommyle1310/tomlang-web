@@ -103,15 +103,15 @@ const useEditor = () => {
             setLoading(true); // Set loading to true before upload
 
             try {
-                const response = await axios.post<{ secure_url: string }>('https://api.cloudinary.com/v1_1/dlavqnrlx/upload', formData);
-                const mediaUrl = response.data.secure_url;
-                console.log('Media URL:', mediaUrl);
+                const response = await axios.post<{ secure_url: string }>('https://api.cloudinary.com/v1_1/demos/image/upload', formData); // Replace with your Cloudinary URL
+                const fileUrl = response.data.secure_url;
 
+                // Now, add the media to the editor state
                 const contentState = editorState.getCurrentContent();
                 const contentStateWithEntity = contentState.createEntity(
                     'media',
                     'IMMUTABLE',
-                    { src: mediaUrl, mediaType: isImage ? 'image' : 'video' }
+                    { src: fileUrl, mediaType: isImage ? 'image' : 'video' }
                 );
                 const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
                 const newEditorState = AtomicBlockUtils.insertAtomicBlock(
@@ -121,29 +121,29 @@ const useEditor = () => {
                 );
                 setEditorState(newEditorState);
             } catch (error) {
-                console.error('Error uploading media:', error);
+                console.error('File upload error:', error);
             } finally {
                 setLoading(false); // Set loading to false after upload
             }
-        } else {
-            console.log('No file selected');
+
+            // Reset file input to allow re-uploading of the same file
+            setFileInputKey(prevKey => prevKey + 1);
         }
-        setFileInputKey(prevKey => prevKey + 1);
     };
 
     return {
         editorState,
         setEditorState,
-        fileInputKey,
+        onBoldClick,
+        changeTextColor,
         changeTextSize,
         toggleBlockType,
-        changeTextColor,
-        onBoldClick,
         logPlainText,
         logHTML,
         addMedia,
+        fileInputKey,
         handleFileChange,
-        loading, // Return loading state
+        loading, // Export loading state
     };
 };
 

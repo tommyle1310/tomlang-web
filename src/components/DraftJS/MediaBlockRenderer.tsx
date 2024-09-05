@@ -1,12 +1,23 @@
 import React from 'react';
-import { ContentBlock } from 'draft-js';
-import Media from './Media'; // Ensure the correct path to your Media component
+import { ContentBlock, ContentState } from 'draft-js';
+import Media from './Media'; // Ensure this path is correct
 
-const mediaBlockRenderer = (block: ContentBlock): { component: React.FC<any>; editable: boolean } | null => {
+// Inline the type definition here instead of importing from MediaWrapper
+interface MediaWrapperProps {
+    contentState: ContentState;
+    block: ContentBlock;
+}
+
+const MediaWrapper: React.FC<MediaWrapperProps> = ({ contentState, block }) => {
+    return <Media contentState={contentState} block={block} />;
+};
+
+const mediaBlockRenderer = (block: ContentBlock) => {
     if (block.getType() === 'atomic') {
         return {
-            component: Media,
-            editable: false
+            component: MediaWrapper, // Use MediaWrapper directly
+            editable: false,
+            props: {}, // Add props if necessary
         };
     }
     return null;
