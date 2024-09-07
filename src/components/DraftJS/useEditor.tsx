@@ -2,6 +2,7 @@ import { useState, ChangeEvent, MouseEvent } from 'react';
 import { EditorState, RichUtils, AtomicBlockUtils, ContentState, DraftBlockType } from 'draft-js';
 import axios from 'axios';
 import { RenderConfig, stateToHTML } from 'draft-js-export-html';
+import MultipleChoice from '../DragAndDrop/MultipleChoice';
 
 const customStyleMap: { [styleName: string]: RenderConfig } = {
     PRIMARY: { style: { color: '#007bff' } },
@@ -53,13 +54,33 @@ const useEditor = () => {
             blockRenderers: {
                 atomic: (block) => {
                     const entityKey = block.getEntityAt(0);
+
                     if (entityKey) {
                         const entity = contentState.getEntity(entityKey);
                         const { src, mediaType } = entity.getData();
+
+
                         if (mediaType === 'image') {
                             return `<figure><img src="${src}" alt="Media" /></figure>`;
                         } else if (mediaType === 'video') {
                             return `<figure><video controls src="${src}"></video></figure>`;
+                        }
+
+                        // drag and drop render log html
+                        const srcType = src.match(/key='([^']+)'/);
+                        const blockType = srcType ? srcType[1] : null;
+                        console.log('check type:', src);
+                        switch (blockType) {
+                            case 'title':
+                                return `<div className='ic gap-4 p-10 rounded-md '>
+                                            <div className="aspect-square rounded-md w-20 bg-slate-200 cursor-pointer hover:duration-300 hover:bg-slate-300 text-slate-500 border cc"><i className="fa-solid fa-plus"></i></div>
+                                            <div className="fc gap-2">
+                                                <Input />
+                                                <Input />
+                                            </div>
+                                        </div>`
+                            case 'multiple-choice':
+                            // return <MultipleChoice onSelect={() => { }} options={[{ id: 1, label: '1' }, { id: 2, label: '2' }, { id: 3, label: '3' }, { id: 4, label: '4' }]} question='hello world' />
                         }
                     }
                     return ''; // Return an empty string if no valid entity is found

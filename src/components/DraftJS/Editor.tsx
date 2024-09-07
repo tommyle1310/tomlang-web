@@ -4,6 +4,11 @@ import mediaBlockRenderer from './MediaBlockRenderer';
 import useEditor from './useEditor';
 import { customStyleMap } from '@/lib/constants/draftConstants';
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
+import ReactDOMServer from 'react-dom/server';
+import { DRAG_DISPLAY, DROP_DISPLAY, MULTIPLE_CHOICE, TITLE } from '@/lib/constants/variables';
+import MultipleChoice from '../DragAndDrop/MultipleChoice';
+import Title from '../DragAndDrop/Title';
+
 
 const MyEditor: React.FC = () => {
     const {
@@ -14,6 +19,7 @@ const MyEditor: React.FC = () => {
         changeTextSize,
         toggleBlockType,
         addMedia,
+        logHTML,
         fileInputKey,
         handleFileChange,
     } = useEditor();
@@ -23,11 +29,21 @@ const MyEditor: React.FC = () => {
 
         try {
             const itemData = event.dataTransfer.getData('application/json');
-            const item = JSON.parse(itemData) as { id: string }; // Adjust based on actual data structure
-            console.log('Dropped item:', item);
+            const item = JSON.parse(itemData) as { id: string, key: string, content: JSX.Element }; // Adjust based on actual data structure
 
-            // Example HTML content to insert
-            const htmlContent = '<div class="bg-red-300 p-10">hello worosadnoasidn</div>';
+            let htmlContent = '';
+            if (item.content.key === MULTIPLE_CHOICE) {
+                const { options, question } = item.content.props.children.props;
+                const jsxElement = <MultipleChoice type={DROP_DISPLAY} options={options} question={question} onSelect={() => { }} />;
+                // Convert JSX to HTML string
+                htmlContent = ReactDOMServer.renderToStaticMarkup(jsxElement);
+            }
+            else if (item.content.key === TITLE) {
+                // const { options, question } = item.content.props.children.props;
+                const jsxElement = <Title type={DROP_DISPLAY} />;
+                // Convert JSX to HTML string
+                htmlContent = ReactDOMServer.renderToStaticMarkup(jsxElement);
+            }
 
             // Create a new ContentState with the HTML content
             const contentState = editorState.getCurrentContent();
@@ -82,6 +98,7 @@ const MyEditor: React.FC = () => {
                 <button className='draft-btn' onMouseDown={toggleBlockType('unordered-list-item')}><i className="fa-solid fa-list-ul"></i></button>
                 <button className='draft-btn' onMouseDown={toggleBlockType('ordered-list-item')}><i className="fa-solid fa-arrow-up-1-9"></i></button>
                 <button className='draft-btn' onMouseDown={addMedia}><i className="fa-solid fa-panorama"></i></button>
+                <button className='draft-btn' onMouseDown={logHTML}>log html</button>
 
                 <input
                     key={fileInputKey}

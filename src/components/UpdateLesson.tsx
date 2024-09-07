@@ -9,7 +9,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
-import DragAndDropExample from '../components/DragAndDrop/test';
+import DragAndDropExample from './DragAndDrop/ListElements';
 
 interface Item {
   id: string;

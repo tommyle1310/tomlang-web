@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import MultipleChoice from './MultipleChoice';
+import Title from './Title';
+import { DRAG_DISPLAY } from '@/lib/constants/variables';
 
 interface Item {
   id: string;
@@ -8,11 +11,14 @@ interface Item {
 const initialListA: Item[] = [
   {
     id: `${Math.random() * Math.random()}`,
-    content: <div style={{ color: 'red', fontSize: 20 }}>hello world</div>,
+    content: <div key='title'><Title type={DRAG_DISPLAY} /></div>,
   },
   {
     id: `${Math.random() + 1 * Math.random()}`,
-    content: <div style={{ color: 'blue', fontSize: 20 }}>hello React</div>,
+    content: <div key='multiple-choice'>
+      <MultipleChoice type={DRAG_DISPLAY} onSelect={() => { }} options={[{ id: 1, label: '1' }, { id: 2, label: '2' }, { id: 3, label: '3' }, { id: 4, label: '4' }]} question='hello world' />
+    </div>
+
   },
 ];
 
@@ -20,7 +26,7 @@ const DragAndDropExample = ({ onDropToEditor }: { onDropToEditor: (item: Item) =
   const [listA] = useState(initialListA);
 
   const handleDragStart = (event: React.DragEvent, item: Item) => {
-    event.dataTransfer.setData('application/json', JSON.stringify({ id: item.id }));
+    event.dataTransfer.setData('application/json', JSON.stringify(item));
   };
 
   return (
