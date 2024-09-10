@@ -40,7 +40,7 @@ const UpdateLesson = () => {
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>Create my lesson</BreadcrumbPage>
+            <BreadcrumbPage>Update my lesson</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>

@@ -1,9 +1,10 @@
 import SearchInput from "@/components/SearchInput"
 import NavItem from "./NavItem"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { AuthForm } from "@/routes/AuthForm"
 
 const NavWeb = () => {
+    const navigate = useNavigate()
     return (
         <div className=" max-lg:hidden mx-auto max-w-screen-lg text-primary-500 font-bold">
             <div className="p-3 jb">
@@ -14,7 +15,8 @@ const NavWeb = () => {
                     </div>
                 </div>
                 <div className="flex items-center">
-                    <NavItem click={() => { }} icon={<i className="fa-solid fa-heart"></i>} title="Wish list" />
+                    <NavItem click={() => { }} icon={<i className="fa-solid fa-heart"></i>} title="Wish List" />
+                    <NavItem click={() => { navigate('/courses') }} icon={<i className="fa-solid fa-person-chalkboard"></i>} title="My Courses" />
                     <NavItem click={() => { }} icon={<i className="fa-solid fa-cart-shopping"></i>} title="Cart" />
                     <AuthForm />
                 </div>

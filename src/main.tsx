@@ -12,6 +12,7 @@ import Course from './routes/Course.tsx';
 import Home from './routes/Home.tsx';
 import UpdateLesson from './components/UpdateLesson.tsx';
 import LessonContent from './routes/LessonContent.tsx';
+import Courses from './routes/Courses.tsx';
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,11 @@ const router = createBrowserRouter([
       {
         path: "course/lesson/:id",
         element: <LessonContent />,
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: "/courses",
+        element: <Courses />,
         errorElement: <ErrorPage />,
       },
       {
